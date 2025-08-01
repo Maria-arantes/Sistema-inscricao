@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Confirmação - Pertalks</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #63adb7b5, #b96ea5b6);
+      overflow-x: hidden; /* Permite rolagem vertical, remove horizontal */
+      overflow-y: auto; /* Garante rolagem vertical quando necessário */
+    }
+
+    .container-fluid {
+      min-height: 100vh; /* Mudança: min-height ao invés de height */
+      display: flex;
+      flex-direction: column; /* Adicionado para layout vertical */
+      align-items: center;
+      justify-content: center;
+      padding: 60px 15px; /* Aumentado padding top/bottom para dar espaço ao footer */
+      position: relative;
+    }
+
+    .confirmation-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 35px 30px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+      max-width: 550px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      max-height: none; /* Removido max-height fixo */
+      margin: 20px 0; /* Adicionado margem para espaçamento */
+    }
+
+    .confirmation-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(135deg, #63adb7, #b96ea5);
+    }
+
+    .main-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #2c3e50;
+      margin-bottom: 10px;
+      letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: #6c757d;
+      margin-bottom: 25px;
+      line-height: 1.4;
+    }
+
+    .confirmation-box {
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      border-radius: 16px;
+      padding: 25px;
+      margin: 20px 0;
+      border: 2px solid #e9ecef;
+      position: relative;
+    }
+
+    .confirmation-status {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #63adb7;
+      margin-bottom: 15px;
+    }
+
+    .email-info {
+      font-size: 0.9rem;
+      color: #6c757d;
+      margin: 15px 0;
+      padding: 10px;
+      background: rgba(99, 173, 183, 0.1);
+      border-radius: 20px;
+      border-left: 4px solid #63adb7;
+    }
+
+    .password-section {
+      margin-top: 20px;
+    }
+
+    .password-label {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #495057;
+      margin-bottom: 10px;
+    }
+
+    .password-display {
+      background: linear-gradient(135deg, #63adb7, #63adb7e2);
+      color: white;
+      min-height: 50px;
+      font-size: 1.5rem;
+      font-weight: 600;
+      padding: 15px 20px;
+      border-radius: 12px;
+      letter-spacing: 2px;
+      margin: 10px 0;
+      box-shadow: 0 6px 20px rgba(99, 173, 183, 0.3);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      word-wrap: break-word;
+      text-align: center;
+    }
+
+    .password-display::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      animation: shimmer 3s infinite;
+    }
+
+    .password-note {
+      font-size: 0.85rem;
+      color: #b96ea5;
+      font-weight: 500;
+      margin-top: 10px;
+      padding: 12px;
+      background: rgba(185, 110, 165, 0.1);
+      border-radius: 10px;
+      border-left: 4px solid #b96ea5;
+    }
+
+    .btn-home {
+      background: linear-gradient(135deg,#63adb7, #b96ea5);
+      color: rgb(255, 255, 255);
+      font-weight: 600;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 25px;
+      font-size: 1rem;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 25px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(185, 110, 165, 0.3);
+    }
+
+    .btn-home:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(185, 110, 165, 0.4);
+      color: white;
+    }
+
+    .footer-info {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  margin-top: auto; /* 👈 Isso empurra o footer pro final */
+  width: 100%;
+}
+
+    .page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+
+
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .confirmation-card {
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    /* Responsividade melhorada */
+    @media (max-width: 768px) {
+      .container-fluid {
+        padding: 80px 15px 60px; /* Aumentado padding para dispositivos móveis */
+      }
+      
+      .confirmation-card {
+        padding: 25px 20px;
+        margin: 10px 0;
+      }
+      
+      .main-title {
+        font-size: 1.8rem;
+      }
+
+      .subtitle {
+        font-size: 0.9rem;
+      }
+      
+      .password-display {
+        font-size: 1.3rem;
+        padding: 12px 15px;
+        letter-spacing: 1px;
+        word-break: break-all;
+        line-height: 1.3;
+        min-height: 45px;
+      }
+
+      .confirmation-box {
+        padding: 20px;
+        margin: 15px 0;
+      }
+
+      .btn-home {
+        margin-top: 20px;
+        padding: 10px 25px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container-fluid {
+        padding: 90px 10px 70px; /* Ainda mais espaço em telas muito pequenas */
+      }
+      
+      .confirmation-card {
+        padding: 20px 15px;
+        border-radius: 15px;
+      }
+      
+      .main-title {
+        font-size: 1.6rem;
+      }
+      
+      .password-display {
+        font-size: 1rem;
+        padding: 12px 15px;
+        letter-spacing: 1px;
+        word-break: break-all; /* Quebra senha longa */
+        line-height: 1.2;
+      }
+      
+      .confirmation-box {
+        padding: 15px;
+      }
+    }
+
+    /* Media query para telas baixas */
+    @media (max-height: 700px) {
+      .container-fluid {
+        padding: 50px 15px 60px; /* Reduzido padding para telas baixas */
+      }
+      
+      .confirmation-card {
+        padding: 20px 25px;
+      }
+      
+      .main-title {
+        font-size: 1.9rem;
+        margin-bottom: 8px;
+      }
+
+      .subtitle {
+        margin-bottom: 15px; /* Reduzido */
+      }
+
+      .confirmation-box {
+        padding: 15px;
+        margin: 10px 0; /* Reduzido */
+      }
+
+      .password-display {
+        font-size: 1.3rem;
+        padding: 15px 20px;
+        margin: 8px 0; /* Reduzido */
+      }
+      
+      .btn-home {
+        margin-top: 15px; /* Reduzido */
+      }
+    }
+
+    /* Para telas muito baixas */
+    @media (max-height: 600px) {
+      .container-fluid {
+        padding: 40px 15px 60px;
+      }
+      
+      .confirmation-card {
+        padding: 15px 20px;
+      }
+      
+      .main-title {
+        font-size: 1.7rem;
+        margin-bottom: 5px;
+      }
+      
+      .subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+      }
+      
+      .confirmation-box {
+        padding: 12px;
+        margin: 8px 0;
+      }
+      
+      .password-display {
+        font-size: 1.1rem;
+        padding: 12px 15px;
+        margin: 5px 0;
+        word-break: break-all; /* Quebra senha longa */
+        line-height: 1.2;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <div class="container-fluid">
+    <div class="confirmation-card">
+      <h1 class="main-title">Inscrição Confirmada!</h1>
+      <p class="subtitle">Sua participação na palestra foi confirmada com sucesso.</p> 
+      
+      <div class="confirmation-box">
+        <div class="confirmation-status">
+          Inscrição Realizada com Sucesso
+        </div>
+        
+        <div class="email-info">
+          <strong>E-mail de confirmação enviado!</strong><br>
+          Verifique sua caixa de entrada para mais detalhes sobre o evento.
+        </div>
+        
+        <div class="password-section">
+          <div class="password-label">
+            <strong>Sua senha de acesso:</strong>
+          </div>
+          <div id="senhaGerada" class="password-display">
+            <span id="senhaAcesso"></span>
+          </div>
+        </div>
+         
+          <div class="password-note">
+            <strong>Importante:</strong> Guarde esta senha com cuidado! Ela será necessária para acessar o evento.
+          </div>
+        </div>
+      </div>
+      
+      <a href="index.html" class="btn-home">← Voltar para Home</a>
+    </div>
+   </div>
+    <div class="footer-info">
+      &copy; 2025 Pertalks | Criado pela Pro Junior
+    </div>
+  </div>
+</body>
+
+  <script>
+  // Captura a senha da URL e exibe na tela
+  const params = new URLSearchParams(window.location.search);
+  const senha = params.get("senha");
+
+  if (senha) {
+    document.getElementById("senhaAcesso").textContent = senha;
+  } else {
+    const senhaAleatoria = Math.random().toString(36).substring(2, 10).toUpperCase();
+    document.getElementById("senhaAcesso").textContent = senhaAleatoria;
+  }
+
+  // Envia dados por e-mail ao carregar a página
+  window.addEventListener("DOMContentLoaded", async () => {
+    const nome = localStorage.getItem("nome");
+    const email = localStorage.getItem("email");
+    const palestra = localStorage.getItem("palestra");
+    const senha = params.get("senha");
+
+    if (nome && email && palestra && senha) {
+      try {
+        await fetch("https://pertalks.onrender.com/enviar-email", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ nome, email, palestra, senha })
+        });
+      } catch (err) {
+        console.error("Erro ao enviar email:", err);
+      }
+    }
+  });
+</script>
+</body>
+</html>
