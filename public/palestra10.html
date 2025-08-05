@@ -155,13 +155,18 @@
     <div class="container">
       <div class="card">
         <div class="card-body">
-          <h2 class="card-title">Coworking Day 2</h2>
+          <h2 class="card-title">TALKS HOTMILK</h2>
           <p class="card-text">
-           Reserve seu espaço no Coworking aqui.
+           PD&I entre Empresa e Universidade: casos de sucesso <br>
+Bate-papo sobre como a PUCPR tem promovido parcerias de sucesso em PD&I com empresas, gerando soluções inovadoras, impactos reais no mercado e avanço científico. Vamos apresentar casos concretos e lições aprendidas para inspirar novas colaborações e parcerias entre Empresa e Universidade.
+
+<br><br>Speaker: Anderson Luis Szejka
+<br>Gerente de Inovação Tecnológica da Hotmilk
+
           </p>
-          <p class="card-text"><strong>Experiência - 2° dia: </strong> 07/08/2025</p>
-          <p class="card-text"><strong>Horário:</strong>8:00 a 18:00</p>
-          <p class="card-text"><strong>Vagas disponíveis:</strong> <span id="vagasDisponiveis">15</span></p>
+          <p class="card-text"><strong>Experiência - 1° dia: </strong> 06/08/2025</p>
+          <p class="card-text"><strong>Horário:</strong>14H às 14h50</p>
+          <p class="card-text"><strong>Vagas disponíveis:</strong> <span id="vagasDisponiveis">20</span></p>
           <p class="card-text"><strong>Status:</strong> <span id="statusInscricao">Inscrições abertas</span></p>
 
 
@@ -193,8 +198,8 @@
     const db = getFirestore(app);
 
     // Lógica para atualizar número de vagas
-    const PALESTRA = "WORK"; // Nome exato usado no campo "palestra" no Firestore
-    const LIMITE_VAGAS = 15;
+    const PALESTRA = "HOTMILK1"; // Nome exato usado no campo "palestra" no Firestore
+    const LIMITE_VAGAS = 20;
 
     async function atualizarVagas() {
       const q = query(collection(db, "inscricoes"), where("senha", "==", PALESTRA));

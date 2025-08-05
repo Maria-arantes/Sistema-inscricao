@@ -155,30 +155,27 @@
     <div class="container">
       <div class="card">
         <div class="card-body">
-          <h2 class="card-title">TALKS HOTMILK</h2>
-          <p class="card-text">
-           O Novo Mapa da Inovação Corporativa
-Bate-papo sobre o panorama atual sobre as transformações do cenário nacional de inovação e o papel de quem lidera esse movimento.
-
-<br><br>Speaker – Aline Scarpin
-<br>Gerente do Portfólio de Inovação da HOTMILK
+          <h2 class="card-title">SAE4MOBILITY - Projetos Motivados pelo Painel</h2>
+          <p class="card-text"> 
+Você que teve insights nas apresentações, questões e debates nos painéis, após o painel teremos uma mesa no Coworking, onde estaremos aguardando vocês para que possamos alinhar com o apoio da SAE4MOBILITY projetos que façam sentido para vocês, para a mobilidade e para o Brasil.
+<br><br>Limite de até 8 pessoas presencialmente por grupo de integração do projeto. <br>Faça sua inscrição.
+<br><br>Mas você também pode deixar seu contato e insights por escrito para nós.
 
           </p>
           <p class="card-text"><strong>Experiência - 2° dia: </strong> 07/08/2025</p>
-          <p class="card-text"><strong>Horário:</strong>14h às 14h45</p>
-          <p class="card-text"><strong>Vagas disponíveis:</strong> <span id="vagasDisponiveis">20</span></p>
+          <p class="card-text"><strong>Horário:</strong> 14h às 15h</p>
+          <p class="card-text"><strong>Vagas disponíveis:</strong> <span id="vagasDisponiveis">8</span></p>
           <p class="card-text"><strong>Status:</strong> <span id="statusInscricao">Inscrições abertas</span></p>
-
 
           <div class="botoes-inscricao">
             <a href="index.html" class="botao-voltar">Voltar para Home</a>
-            <a href="inscricao9.html" class="botao-inscricao">Realizar Inscrição</a>
+            <a href="inscricao11.html" class="botao-inscricao">Realizar Inscrição</a>
           </div>
         </div>
       </div>
     </div>
     </div>
-  </section>
+    </section>
 
   <!-- Footer -->
   <footer>
@@ -191,15 +188,21 @@ Bate-papo sobre o panorama atual sobre as transformações do cenário nacional 
     import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
     const firebaseConfig = {
-      
+      apiKey: "AIzaSyAF00dTAPcdgXCVPISlq9xDK7bZ7FSNx_0",
+      authDomain: "inscricaopertalks.firebaseapp.com",
+      projectId: "inscricaopertalks",
+      storageBucket: "inscricaopertalks.firebasestorage.app",
+      messagingSenderId: "523613776287",
+      appId: "1:523613776287:web:0cedb8ac4b821e5c6275aa",
+      measurementId: "G-BM100R5MN1"
     };
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
     // Lógica para atualizar número de vagas
-    const PALESTRA = "HOTMILK2"; // Nome exato usado no campo "palestra" no Firestore
-    const LIMITE_VAGAS = 20;
+    const PALESTRA = "MOB2"; // Nome exato usado no campo "palestra" no Firestore
+    const LIMITE_VAGAS = 8;
 
     async function atualizarVagas() {
       const q = query(collection(db, "inscricoes"), where("senha", "==", PALESTRA));
