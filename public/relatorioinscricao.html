@@ -61,6 +61,7 @@
       color: white;
       padding: 45px 20px;
       text-align: center;
+       flex-shrink: 0;
     }
 
     .header h1 {
@@ -93,8 +94,8 @@
       color: white;
       text-align: center;
       padding: 30px 0;
-      margin-top: 50px;
-      position: relative; /* Fixar o rodapé na parte inferior da página */
+      position: relative;
+      margin-top: auto;
       bottom: 0;
       width: 100%; /* Garantir que ocupe toda a largura */
       left: 0;
@@ -296,7 +297,7 @@ document.getElementById("btn-exportar").addEventListener("click", () => {
   });
 
   doc.autoTable({
-    head: [['Experiência', '                          Quantidade de Inscritos']],
+    head: [['Experiência', 'Quantidade de Inscritos']],
     body: tableData,
     startY: 30,
     theme: 'grid',
